@@ -2,9 +2,11 @@ package com.utn.tp2_grupo7_pa2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
         int idOpcion = item.getItemId();
 
         if(idOpcion == R.id.it_agregar){
-            Toast.makeText(this,"agregar",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"agregar",Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, "Listar",Toast.LENGTH_LONG).show();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void agregarContacto(View view){
+        Intent agregarContacto = new Intent(this, AgregarContactoActivity.class);
+        startActivity(agregarContacto);
     }
 }

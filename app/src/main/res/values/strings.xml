@@ -2,4 +2,19 @@
     <string name="app_name">EjercicioControles - Grupo 7</string>
     <string name="it_agregar">Agregar contactos</string>
     <string name="it_listar">Listado de contactos</string>
+    <string name="txtTituloAgregar">FORMULARIO DE CONTACTO</string>
+    <string name="txtDescriAgregar">Este es un formulario destinado al registro de personas, sus datos personales e intereses.</string>
+    <string name="txtNombre">NOMBRE</string>
+    <string name="txtApellido">APELLIDO</string>
+    <string name="txtTelefono">TELÉFONO</string>
+    <string name="txtEmail">EMAIL</string>
+    <string name="txtDireccion">DIRECCION</string>
+    <string name="txtFechaNac">FECHA DE NACIMIENTO</string>
+    <string name="etNombre">Nombre</string>
+    <string name="etApellido">Apellido</string>
+    <string name="etTelefono">Telefono</string>
+    <string name="etEmail">Email</string>
+    <string name="etDireccion">Direccion</string>
+    <string name="etFechaNac">Fecha de nacimiento</string>
+    <string name="btnContinuar">CONTINUAR</string>
 </resources>
