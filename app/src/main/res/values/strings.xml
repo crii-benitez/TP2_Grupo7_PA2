@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">TP2_Grupo7_PA2</string>
+    <string name="app_name">EjercicioControles - Grupo 7</string>
+    <string name="it_agregar">Agregar contactos</string>
+    <string name="it_listar">Listado de contactos</string>
 </resources>
