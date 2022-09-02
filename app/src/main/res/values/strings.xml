@@ -17,4 +17,21 @@
     <string name="etDireccion">Direccion</string>
     <string name="etFechaNac">Fecha de nacimiento</string>
     <string name="btnContinuar">CONTINUAR</string>
+
+    <!-- MAS DATOS -->
+    <string name="info_contact_form_personal_data">A continuación, por favor se pide completar más datos personales.</string>
+    <string name="tv_nivelestudio">Nivel de estudios alcanzados</string>
+    <string name="rb_primariaincompleto">Primaria incompleto</string>
+    <string name="rb_primariacompleto">Primaria completo</string>
+    <string name="rb_secundarioincompleto">Secundario incompleto</string>
+    <string name="rb_secundariocompleto">Secundario completo</string>
+    <string name="rb_otros">Otros</string>
+    <string name="tv_intereses">Intereses</string>
+    <string name="cbdeporte">Deporte</string>
+    <string name="cbmusica">Musica</string>
+    <string name="cbarte">Arte</string>
+    <string name="cbtecnologia">Tecnología</string>
+    <string name="tv_recibeinformacion">¿Desea recibir información?</string>
+    <string name="switchsi">Sí</string>
+    <string name="btn_guardar">Guardar</string>
 </resources>
