@@ -32,9 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(idOpcion == R.id.it_agregar){
             agregarContacto(this);
-        }else{
-            Toast.makeText(this, "Listar",Toast.LENGTH_LONG).show();
         }
+
+        if(idOpcion == R.id.it_listar){
+            listarContactos(this);
+        }
+
+        //   else{
+        //       Toast.makeText(this, "Error",Toast.LENGTH_LONG).show();
+        //   }
 
         return super.onOptionsItemSelected(item);
     }
@@ -42,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
     public void agregarContacto(Context context){
         Intent agregarContacto = new Intent(context, AgregarContactoActivity.class);
         startActivity(agregarContacto);
+    }
+    public void listarContactos(Context context){
+        Intent listarContactos = new Intent(context, ListarContactosActivity.class);
+        startActivity(listarContactos);
     }
 }
