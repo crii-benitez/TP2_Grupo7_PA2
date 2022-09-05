@@ -14,17 +14,22 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class DetalleContactoActivity extends AppCompatActivity {
     RadioGroup rgEstudios;
     RadioButton rbPrimarioIncompleto, rbPrimarioCompleto, rbSecundarioIncompleto, rbSecundarioCompleto, rbOtros;
     CheckBox cbDeporte, cbMusica, cbArte, cbTecnologia;
     Switch switchRecibirInfo;
     Button btnGuardar;
-//test
+    private String archivo = "persona.obj";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_contacto);
+
 
         rgEstudios = (RadioGroup) findViewById(R.id.rgEstudios);
         rbPrimarioIncompleto = (RadioButton) findViewById(R.id.rbPrimarioIncompleto);
@@ -43,7 +48,16 @@ public class DetalleContactoActivity extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardar);
 
         btnGuardar.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "Registro guardado.", Toast.LENGTH_SHORT).show();
+
+            try{
+                ObjectOutputStream objOutput = new ObjectOutputStream(openFileOutput(archivo, MODE_PRIVATE));
+                objOutput.writeObject(new Contacto("3456","Juan", "Gómez"));
+                Toast.makeText(v.getContext(), "Guardado con exito", Toast.LENGTH_SHORT).show();
+                objOutput.close();
+            }catch (IOException e){
+                Toast.makeText(v.getContext(), "Error al guardar el archivo", Toast.LENGTH_SHORT).show();
+            }
+
             finish();
         });
     }
