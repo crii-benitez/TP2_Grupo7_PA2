@@ -20,7 +20,7 @@ public class DetalleContactoActivity extends AppCompatActivity {
     CheckBox cbDeporte, cbMusica, cbArte, cbTecnologia;
     Switch switchRecibirInfo;
     Button btnGuardar;
-
+//test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
