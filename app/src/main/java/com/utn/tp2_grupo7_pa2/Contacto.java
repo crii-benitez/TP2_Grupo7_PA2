@@ -14,7 +14,10 @@ public class Contacto implements Serializable {
     private String [] intereses ;
     private boolean recibirInfo;
 
+    public Contacto()
+    {
 
+    }
 
     public Contacto(String identificación, String nombre, String apellidos, String telefono, String email, String direccion, Date fechaNacimiento, String estudios, String[] intereses, boolean recibirInfo) {
         this.nombre = nombre;
@@ -102,16 +105,7 @@ public class Contacto implements Serializable {
 
     @Override
     public String toString() {
-        return "Contacto:" +
-                ",\n nombre:'" + nombre + '\'' +
-                ",\n apellidos:'" + apellidos + '\'' +
-                ",\n telefono:'" + telefono + '\'' +
-                ",\n email='" + email + '\'' +
-                ",\n direccion:'" + direccion + '\'' +
-                ",\n fechaNacimiento:" + fechaNacimiento +
-                ",\n estudios:'" + estudios + '\'' +
-                ",\n intereses:" + Arrays.toString(intereses) +
-                ",\n recibirInfo:" + recibirInfo;
+        return nombre + " " + apellidos + " - " + email;
 
     }
 }
