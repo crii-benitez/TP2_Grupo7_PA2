@@ -1,21 +1,19 @@
 package com.utn.tp2_grupo7_pa2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class DetalleContactoActivity extends AppCompatActivity {
@@ -31,6 +29,7 @@ public class DetalleContactoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_contacto);
 
+        Bundle prevBundle = getIntent().getExtras();
 
         rgEstudios = (RadioGroup) findViewById(R.id.rgEstudios);
         rbPrimarioIncompleto = (RadioButton) findViewById(R.id.rbPrimarioIncompleto);
@@ -51,10 +50,41 @@ public class DetalleContactoActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
 
             try{
-                String[] interest = {"Musica"};
-                Date d3 = new Date(2010, 1, 3);
                 ObjectOutputStream objOutput = new ObjectOutputStream(openFileOutput(archivo, MODE_PRIVATE));
-                objOutput.writeObject(new Contacto("3456","Juan", "Gómez","112112312","sdas@gmail.com","calle falsa 123", d3,"Secundarios", interest ,true));
+
+                Contacto con = new Contacto();
+                con.setIdentificación("1234");
+                con.setApellidos(prevBundle.getString("apellido"));
+                con.setNombre(prevBundle.getString("nombre"));
+                con.setDireccion(prevBundle.getString("direccion"));
+                con.setEmail(prevBundle.getString("email"));
+
+                int radioButtonID = rgEstudios.getCheckedRadioButtonId();
+                if(radioButtonID == -1)
+                    Toast.makeText(v.getContext(), "Seleccione un estudio", Toast.LENGTH_SHORT).show();
+                else {
+                    RadioButton radioButton = (RadioButton) rgEstudios.findViewById(radioButtonID);
+                    String estudiosText = (String) radioButton.getText();
+                    con.setEstudios(estudiosText);
+                }
+                ArrayList<String> intereses = new ArrayList<String>();
+                if(cbArte.isChecked())
+                    intereses.add(cbArte.getText().toString());
+                if(cbDeporte.isChecked())
+                    intereses.add(cbDeporte.getText().toString());
+                if(cbMusica.isChecked())
+                    intereses.add(cbMusica.getText().toString());
+                if(cbTecnologia.isChecked())
+                    intereses.add(cbTecnologia.getText().toString());
+                con.setIntereses(intereses);
+                try {
+                    con.setFechaNacimiento(new SimpleDateFormat("dd/MM/yyyy").parse(prevBundle.getString("fechanac")));
+                } catch(Exception e) {
+                    Toast.makeText(v.getContext(), "Fecha inválida", Toast.LENGTH_SHORT).show();
+                }
+                con.setTelefono(prevBundle.getString("telefono"));
+                con.setRecibirInfo(switchRecibirInfo.isChecked());
+                objOutput.writeObject(con);
                 Toast.makeText(v.getContext(), "Guardado con exito", Toast.LENGTH_SHORT).show();
                 objOutput.close();
             }catch (IOException e){
