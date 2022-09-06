@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 public class DetalleContactoActivity extends AppCompatActivity {
     RadioGroup rgEstudios;
@@ -50,8 +51,10 @@ public class DetalleContactoActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
 
             try{
+                String[] interest = {"Musica"};
+                Date d3 = new Date(2010, 1, 3);
                 ObjectOutputStream objOutput = new ObjectOutputStream(openFileOutput(archivo, MODE_PRIVATE));
-                objOutput.writeObject(new Contacto("3456","Juan", "Gómez"));
+                objOutput.writeObject(new Contacto("3456","Juan", "Gómez","112112312","sdas@gmail.com","calle falsa 123", d3,"Secundarios", interest ,true));
                 Toast.makeText(v.getContext(), "Guardado con exito", Toast.LENGTH_SHORT).show();
                 objOutput.close();
             }catch (IOException e){
