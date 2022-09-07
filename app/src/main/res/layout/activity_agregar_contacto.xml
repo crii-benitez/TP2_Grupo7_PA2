@@ -156,7 +156,7 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:text="@string/etEmail"
+            android:hint="@string/etEmail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 

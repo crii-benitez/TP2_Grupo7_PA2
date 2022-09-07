@@ -10,13 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 public class ListarContactosActivity extends AppCompatActivity {
 
-    Button btnContinuar;
+    private final static String FileName = "contactos.txt";
     private ListView lvContacto;
     private String archivo = "persona.obj";
 
@@ -26,34 +28,30 @@ public class ListarContactosActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_listar_contactos);
         lvContacto = findViewById(R.id.lvContacto);
-        try{
-            ObjectInputStream objInput = new ObjectInputStream(openFileInput(archivo));
-            Contacto contacto = (Contacto) objInput.readObject();
-            objInput.close();
 
-            //TODO: Deberiamos recorrer por medio de un foreach todos los contactos y agregarlos en el array contactoList:
-            ArrayList<Contacto> contactoList = new ArrayList<Contacto>();
-            contactoList.add(contacto);
+        Almacenamiento almacenamiento = new Almacenamiento();
+        String archivos [] = fileList();
 
-            //TODO: Agrego un contacto para visualizar más de uno
-            Contacto cont = new Contacto();
-            cont.setNombre("Gabriel");
-            cont.setApellidos("Robledo");
-            cont.setEmail("gaby-2011@hotmail.com");
-            contactoList.add(cont);
+        ArrayList<Contacto> contactoList = new ArrayList<Contacto>();
 
-            // Llamo al metodo que se encarga de armar el ListView con todos los contactos.
-            SetLisView(contactoList);
+        if(almacenamiento.ArchivoExiste(archivos, FileName)){
+            try {
+                InputStreamReader archivo = new InputStreamReader(openFileInput(FileName));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
 
-            Toast toast2 = Toast.makeText(getApplicationContext(), "Archivo cargado correctamente", Toast.LENGTH_SHORT);
-            toast2.setGravity(Gravity.CENTER|Gravity.LEFT,0,0);
-            toast2.show();
-        }catch (IOException e){
-            Toast.makeText(this, "Error al cargar el archivo", Toast.LENGTH_SHORT).show();
+                while(linea != null){
+                    contactoList.add(Contacto.fromCsvToClass(linea));
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+            }catch (IOException e){
+                Toast.makeText(this, "Ocurrió un error al leer los contactos.", Toast.LENGTH_SHORT).show();
+            }
         }
-        catch (ClassNotFoundException e){
-            Log.e("MainActivity", "Error clase no encontrada");
-        }
+
+        SetLisView(contactoList);
     }
 
     public void SetLisView(ArrayList<Contacto> contactoList)

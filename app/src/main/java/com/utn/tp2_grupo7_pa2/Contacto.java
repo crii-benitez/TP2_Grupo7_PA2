@@ -10,24 +10,20 @@ public class Contacto implements Serializable {
     private String telefono;
     private String email;
     private String direccion;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String estudios;
     private List<String> intereses ;
     private boolean recibirInfo;
 
     public Contacto() {}
 
-    public Contacto(String identificación, String nombre, String apellidos, String telefono, String email, String direccion, Date fechaNacimiento, String estudios, List<String> intereses, boolean recibirInfo) {
+    public Contacto(String nombre, String apellido, String email, String direccion, String fechaNacimiento)
+    {
         this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.telefono = telefono;
+        this.apellidos = apellido;
         this.email = email;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
-        this.estudios = estudios;
-        this.intereses = intereses;
-        this.recibirInfo = recibirInfo;
-        this.identificación = identificación;
     }
 
     public String getIdentificación() {
@@ -78,11 +74,11 @@ public class Contacto implements Serializable {
         this.direccion = direccion;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -108,6 +104,23 @@ public class Contacto implements Serializable {
 
     public void setRecibirInfo(boolean recibirInfo) {
         this.recibirInfo = recibirInfo;
+    }
+
+    public String toCSV(){
+        return nombre + ";" +
+                apellidos + ";" +
+                email + ";" +
+                direccion + ";" +
+                fechaNacimiento + ";\n";
+    }
+
+    public String getHeaderCSV(){
+        return "nombre;apellidos;email;direccion;fechaNacimiento;\n";
+    }
+
+    public static Contacto fromCsvToClass(String CSV){
+        String values [] = CSV.split(";");
+        return new Contacto(values[0], values[1], values[2], values[3], values[4]);
     }
 
     @Override
